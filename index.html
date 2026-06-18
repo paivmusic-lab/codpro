@@ -137,11 +137,36 @@
             gap: 12px;
             transition: all 0.3s ease;
             box-shadow: 0 8px 20px rgba(0, 136, 204, 0.4);
-            margin: 40px 0 20px 0;
+            margin: 40px 0 15px 0;
             position: relative;
             z-index: 10;
         }
         .telegram-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 25px rgba(0, 136, 204, 0.6); }
+
+        /* ستایلی دوگمەی واتسئاپ */
+        .whatsapp-btn {
+            background: linear-gradient(to right, #25D366, #128C7E);
+            color: #fff;
+            border: none;
+            padding: 18px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 14px;
+            cursor: pointer;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
+            margin: 0 0 20px 0;
+            position: relative;
+            z-index: 10;
+            text-decoration: none;
+            box-sizing: border-box;
+        }
+        .whatsapp-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 25px rgba(37, 211, 102, 0.6); }
 
         .ad-box { 
             margin: 15px auto; 
@@ -194,7 +219,7 @@
                 <script src="https://www.highperformanceformat.com/f77e24d95e60a11691403dca6c13eebd/invoke.js"></script>
             </div>
 
-            <!-- بۆکسی سەرەکی VIP (پڕ لە ڕیکلام بۆ ناچارکردنی سکڕۆڵ) -->
+            <!-- بۆکسی سەرەکی VIP -->
             <div class="premium-card">
                 <div class="icon-circle">
                     <i class="fas fa-gift"></i>
@@ -270,11 +295,17 @@
                     </div>
                 </div>
 
-                <!-- دوگمەی فێڵاوییەکە (پاش بینینی هەموو ڕیکلامەکان) -->
+                <!-- دوگمەی فێڵاوییەکە -->
                 <button id="telegramBtn" class="telegram-btn">
                     <i class="fab fa-telegram-plane" style="font-size: 22px;"></i>
-                    کۆدەکە لێرە وەربگرە
+                    کۆدەکە لێرە وەربگرە (تێلیگرام)
                 </button>
+
+                <!-- دوگمەی واتسئاپ کە زیادکراوە -->
+                <a href="https://wa.me/qr/GNAX4RXMYZEBM1" target="_blank" class="whatsapp-btn">
+                    <i class="fab fa-whatsapp" style="font-size: 22px;"></i>
+                    لە ڕێگەی واتسئاپەوە پەیوەندی بکە
+                </a>
 
                 <!-- ڕیکلامی ژێر دوگمەکە -->
                 <div class="ad-box">
