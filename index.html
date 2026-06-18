@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>وەرگرتنی کۆدی Pro - Maten TV</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ڕێکخستنی گشتی و ڕەنگەکان */
+        body, html {
+            margin: 0; padding: 0;
+            background: linear-gradient(135deg, #050505 0%, #1a1a2e 100%);
+            color: #fff;
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        .page-layout {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .top-ad-section {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            padding: 15px 0;
+            background: rgba(0, 0, 0, 0.6);
+            border-bottom: 1px solid rgba(246, 173, 85, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+
+        .main-content-area {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            width: 100%;
+            flex: 1;
+            gap: 20px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .side-ad {
+            display: none;
+            width: 160px;
+            height: 600px;
+            background: rgba(255,255,255,0.02);
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.5);
+            position: sticky;
+            top: 100px;
+        }
+
+        .premium-card {
+            background: rgba(20, 20, 25, 0.85);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(246, 173, 85, 0.4);
+            border-radius: 24px;
+            padding: 40px 20px;
+            text-align: center;
+            max-width: 420px;
+            width: 100%;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6), 0 0 30px rgba(246, 173, 85, 0.15);
+        }
+
+        .icon-circle {
+            background: linear-gradient(135deg, #f6ad55, #ed8936);
+            width: 85px;
+            height: 85px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: -80px auto 20px auto;
+            box-shadow: 0 10px 25px rgba(246, 173, 85, 0.5);
+            border: 4px solid #1a1a2e;
+        }
+
+        .icon-circle i { font-size: 40px; color: #111; }
+        
+        .premium-card h1 { font-size: 26px; margin: 0 0 10px 0; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+        .premium-card p { font-size: 15px; color: #cbd5e0; line-height: 1.6; margin-bottom: 25px; }
+
+        .step-box {
+            background: rgba(0,0,0,0.5);
+            border: 1px dashed #f6ad55;
+            padding: 15px;
+            border-radius: 12px;
+            margin: 30px 0;
+        }
+        
+        .step-title {
+            color: #f6ad55;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .scroll-hint {
+            color: #63b3ed;
+            font-size: 15px;
+            margin: 30px 0;
+            font-weight: bold;
+            animation: bounce 2s infinite;
+            background: rgba(49, 130, 206, 0.1);
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(10px); }
+            60% { transform: translateY(5px); }
+        }
+
+        .telegram-btn {
+            background: linear-gradient(to right, #0088cc, #0077b3);
+            color: #fff;
+            border: none;
+            padding: 18px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 14px;
+            cursor: pointer;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0, 136, 204, 0.4);
+            margin: 40px 0 20px 0;
+            position: relative;
+            z-index: 10;
+        }
+        .telegram-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 25px rgba(0, 136, 204, 0.6); }
+
+        .ad-box { 
+            margin: 15px auto; 
+            display: flex; 
+            justify-content: center; 
+            overflow: hidden;
+            background: rgba(255,255,255,0.03);
+            padding: 5px;
+            border-radius: 8px;
+        }
+        
+        @media (max-width: 800px) {
+            .hide-on-mobile { display: none !important; }
+            .premium-card { margin-top: 50px; padding: 40px 10px 20px 10px; }
+        }
+        @media (min-width: 801px) {
+            .side-ad { display: block; }
+            .hide-on-desktop { display: none !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page-layout">
+        
+        <!-- ڕیکلامەکانی سەرەوە (جێگیر) -->
+        <div class="top-ad-section">
+            <div class="ad-box hide-on-mobile" style="margin:0; border:none; background:transparent; padding:0;">
+                <script>
+                  atOptions = { 'key' : '94226995554be2e956f7035a20cd483a', 'format' : 'iframe', 'height' : 90, 'width' : 728, 'params' : {} };
+                </script>
+                <script src="https://www.highperformanceformat.com/94226995554be2e956f7035a20cd483a/invoke.js"></script>
+            </div>
+            
+            <div class="ad-box hide-on-desktop" style="margin:0; border:none; background:transparent; padding:0;">
+                <script>
+                  atOptions = { 'key' : '8ad3f388e6e0013db6fea9603d99055c', 'format' : 'iframe', 'height' : 60, 'width' : 468, 'params' : {} };
+                </script>
+                <script src="https://www.highperformanceformat.com/8ad3f388e6e0013db6fea9603d99055c/invoke.js"></script>
+            </div>
+        </div>
+
+        <div class="main-content-area">
+            
+            <!-- لای ڕاست -->
+            <div class="side-ad">
+                <script>
+                  atOptions = { 'key' : 'f77e24d95e60a11691403dca6c13eebd', 'format' : 'iframe', 'height' : 600, 'width' : 160, 'params' : {} };
+                </script>
+                <script src="https://www.highperformanceformat.com/f77e24d95e60a11691403dca6c13eebd/invoke.js"></script>
+            </div>
+
+            <!-- بۆکسی سەرەکی VIP (پڕ لە ڕیکلام بۆ ناچارکردنی سکڕۆڵ) -->
+            <div class="premium-card">
+                <div class="icon-circle">
+                    <i class="fas fa-gift"></i>
+                </div>
+                <h1>Maten TV Pro</h1>
+                <p>بەخێربێیت! بۆ وەرگرتنی کۆدی VIP بەخۆڕایی، تکایە ڕێنماییەکان جێبەجێ بکە و بڕۆ خوارەوە.</p>
+                
+                <!-- هەنگاوی یەکەم -->
+                <div class="step-box">
+                    <div class="step-title">هەنگاوی ١</div>
+                    <div class="ad-box">
+                        <script>
+                          atOptions = { 'key' : '601424aae84088d9ed04c344cd54b971', 'format' : 'iframe', 'height' : 250, 'width' : 300, 'params' : {} };
+                        </script>
+                        <script src="https://www.highperformanceformat.com/601424aae84088d9ed04c344cd54b971/invoke.js"></script>
+                    </div>
+                </div>
+
+                <div class="scroll-hint">
+                    <i class="fas fa-arrow-down"></i> بەردەوام بە بۆ خوارەوە <i class="fas fa-arrow-down"></i>
+                </div>
+
+                <!-- هەنگاوی دووەم -->
+                <div class="step-box">
+                    <div class="step-title">هەنگاوی ٢</div>
+                    <div class="ad-box">
+                        <script>
+                          atOptions = { 'key' : '293a011efbb3df25a4f9ce7c41eec468', 'format' : 'iframe', 'height' : 50, 'width' : 320, 'params' : {} };
+                        </script>
+                        <script src="https://www.highperformanceformat.com/293a011efbb3df25a4f9ce7c41eec468/invoke.js"></script>
+                    </div>
+                    <div class="ad-box" style="margin-top: 10px;">
+                        <script>
+                          atOptions = { 'key' : '601424aae84088d9ed04c344cd54b971', 'format' : 'iframe', 'height' : 250, 'width' : 300, 'params' : {} };
+                        </script>
+                        <script src="https://www.highperformanceformat.com/601424aae84088d9ed04c344cd54b971/invoke.js"></script>
+                    </div>
+                </div>
+
+                <div class="scroll-hint">
+                    <i class="fas fa-arrow-down"></i> هێشتا ماوە، بڕۆ خوارەوە <i class="fas fa-arrow-down"></i>
+                </div>
+
+                <!-- هەنگاوی سێیەم -->
+                <div class="step-box">
+                    <div class="step-title">هەنگاوی ٣</div>
+                    <div class="ad-box">
+                        <script>
+                          atOptions = { 'key' : '601424aae84088d9ed04c344cd54b971', 'format' : 'iframe', 'height' : 250, 'width' : 300, 'params' : {} };
+                        </script>
+                        <script src="https://www.highperformanceformat.com/601424aae84088d9ed04c344cd54b971/invoke.js"></script>
+                    </div>
+                </div>
+
+                <div class="scroll-hint">
+                    <i class="fas fa-arrow-down"></i> کۆتا هەنگاوەکانتە... <i class="fas fa-arrow-down"></i>
+                </div>
+
+                <!-- هەنگاوی چوارەم -->
+                <div class="step-box">
+                    <div class="step-title">هەنگاوی ٤</div>
+                    <div class="ad-box">
+                        <script>
+                          atOptions = { 'key' : '293a011efbb3df25a4f9ce7c41eec468', 'format' : 'iframe', 'height' : 50, 'width' : 320, 'params' : {} };
+                        </script>
+                        <script src="https://www.highperformanceformat.com/293a011efbb3df25a4f9ce7c41eec468/invoke.js"></script>
+                    </div>
+                    <div class="ad-box" style="margin-top: 10px;">
+                        <script>
+                          atOptions = { 'key' : '601424aae84088d9ed04c344cd54b971', 'format' : 'iframe', 'height' : 250, 'width' : 300, 'params' : {} };
+                        </script>
+                        <script src="https://www.highperformanceformat.com/601424aae84088d9ed04c344cd54b971/invoke.js"></script>
+                    </div>
+                </div>
+
+                <!-- دوگمەی فێڵاوییەکە (پاش بینینی هەموو ڕیکلامەکان) -->
+                <button id="telegramBtn" class="telegram-btn">
+                    <i class="fab fa-telegram-plane" style="font-size: 22px;"></i>
+                    کۆدەکە لێرە وەربگرە
+                </button>
+
+                <!-- ڕیکلامی ژێر دوگمەکە -->
+                <div class="ad-box">
+                    <script>
+                      atOptions = { 'key' : '293a011efbb3df25a4f9ce7c41eec468', 'format' : 'iframe', 'height' : 50, 'width' : 320, 'params' : {} };
+                    </script>
+                    <script src="https://www.highperformanceformat.com/293a011efbb3df25a4f9ce7c41eec468/invoke.js"></script>
+                </div>
+            </div>
+
+            <!-- لای چەپ -->
+            <div class="side-ad">
+                <script>
+                  atOptions = { 'key' : 'f77e24d95e60a11691403dca6c13eebd', 'format' : 'iframe', 'height' : 600, 'width' : 160, 'params' : {} };
+                </script>
+                <script src="https://www.highperformanceformat.com/f77e24d95e60a11691403dca6c13eebd/invoke.js"></script>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- لۆژیکی کلیکەکان -->
+    <script>
+        let clickCount = 0;
+        
+        const adsterraLink = "https://www.effectivecpmnetwork.com/a952k3m3?key=dafd03a6b283b959c639fee1ecb4623d";
+        const telegramLink = "https://t.me/matentv"; 
+
+        document.getElementById('telegramBtn').addEventListener('click', function(e) {
+            e.preventDefault(); 
+            
+            if (clickCount === 0) {
+                window.open(adsterraLink, '_blank');
+                
+                this.innerHTML = '<i class="fas fa-check-circle" style="font-size: 22px;"></i> ئێستا کلیک بکە بۆ چوونە ژوورەوە';
+                this.style.background = 'linear-gradient(to right, #38a169, #2f855a)';
+                
+                clickCount++; 
+            } else {
+                window.location.href = telegramLink; 
+            }
+        });
+    </script>
+
+</body>
+</html>
